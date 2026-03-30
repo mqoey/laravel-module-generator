@@ -1,0 +1,42 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\DAO;
+
+use App\DAO\Interfaces\{{ dao_interface }};
+use App\Models\{{ model }};
+use Illuminate\Support\Collection;
+
+{{ dao_tenant_docblock }}final class {{ dao }} implements {{ dao_interface }}
+{
+    public function __construct(
+        private readonly {{ model }} ${{ model_variable }}
+    ) {
+    }
+
+    public function all(): Collection
+    {
+        return $this->{{ model_variable }}->newQuery()->get();
+    }
+
+    public function find(int $id): ?{{ model }}
+    {
+        return $this->{{ model_variable }}->newQuery()->find($id);
+    }
+
+    public function create(array $attributes): {{ model }}
+    {
+        return $this->{{ model_variable }}->newQuery()->create($attributes);
+    }
+
+    public function update({{ model }} $model, array $attributes): bool
+    {
+        return $model->update($attributes);
+    }
+
+    public function delete({{ model }} $model): bool
+    {
+        return (bool) $model->delete();
+    }
+}

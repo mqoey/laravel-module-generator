@@ -1,0 +1,58 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Http\Controllers\Api;
+
+use App\Http\Controllers\Controller;
+use App\Models\{{ model }};
+use App\Repositories\Interfaces\{{ interface }};
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+
+final class {{ controller }} extends Controller
+{
+    public function __construct(
+        private readonly {{ interface }} ${{ model_variable }}Repository
+    ) {
+    }
+
+    public function index(): JsonResponse
+    {
+        return response()->json($this->{{ model_variable }}Repository->all());
+    }
+
+    public function show({{ model }} ${{ model_variable }}): JsonResponse
+    {
+        return response()->json(${{ model_variable }});
+    }
+
+    public function store(Request $request): JsonResponse
+    {
+        $data = $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+        ]);
+
+        $created = $this->{{ model_variable }}Repository->create($data);
+
+        return response()->json($created, 201);
+    }
+
+    public function update(Request $request, {{ model }} ${{ model_variable }}): JsonResponse
+    {
+        $data = $request->validate([
+            'name' => ['sometimes', 'string', 'max:255'],
+        ]);
+
+        $this->{{ model_variable }}Repository->update(${{ model_variable }}, $data);
+
+        return response()->json(${{ model_variable }}->refresh());
+    }
+
+    public function destroy({{ model }} ${{ model_variable }}): JsonResponse
+    {
+        $this->{{ model_variable }}Repository->delete(${{ model_variable }});
+
+        return response()->json(null, 204);
+    }
+}

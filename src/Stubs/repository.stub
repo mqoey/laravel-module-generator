@@ -1,0 +1,42 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Repositories;
+
+use App\Models\{{ model }};
+use App\Repositories\Interfaces\{{ interface }};
+use Illuminate\Support\Collection;
+
+{{ repository_tenant_docblock }}final class {{ repository }} extends BaseRepository implements {{ interface }}
+{
+    public function __construct({{ model }} ${{ model_variable }})
+    {
+        parent::__construct(${{ model_variable }});
+    }
+
+    public function all(): Collection
+    {
+        return $this->query()->get();
+    }
+
+    public function find(int $id): ?{{ model }}
+    {
+        return $this->query()->find($id);
+    }
+
+    public function create(array $attributes): {{ model }}
+    {
+        return $this->query()->create($attributes);
+    }
+
+    public function update({{ model }} $model, array $attributes): bool
+    {
+        return $model->update($attributes);
+    }
+
+    public function delete({{ model }} $model): bool
+    {
+        return (bool) $model->delete();
+    }
+}

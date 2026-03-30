@@ -1,0 +1,10 @@
+<template>
+  <div class="p-6">
+    <h1 class="text-xl font-semibold">{{ plural_model }} index</h1>
+    <p class="text-sm text-gray-600 mt-2">Module page stub (Inertia + Vue).</p>
+  </div>
+</template>
+
+<script setup lang="ts">
+// {{ plural_model }} — generated page stub
+</script>

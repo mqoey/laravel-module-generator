@@ -1,0 +1,22 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+{{ tenant_imports }}
+
+class {{ model }} extends Model
+{
+    use HasFactory;
+
+    protected $table = '{{ table }}';
+
+    protected $fillable = [
+        {{ fillable }}
+    ];
+{{ tenant_booted }}
+{{ tenant_scope }}
+}

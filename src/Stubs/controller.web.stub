@@ -1,0 +1,22 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Http\Controllers;
+
+use App\Http\Controllers\Controller;
+use App\Repositories\Interfaces\{{ interface }};
+use Illuminate\Http\JsonResponse;
+
+final class {{ controller }} extends Controller
+{
+    public function __construct(
+        private readonly {{ interface }} ${{ model_variable }}Repository
+    ) {
+    }
+
+    public function index(): JsonResponse
+    {
+        return response()->json($this->{{ model_variable }}Repository->all());
+    }
+}

@@ -1,0 +1,24 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Repositories\Interfaces;
+
+use App\Models\{{ model }};
+use Illuminate\Support\Collection;
+
+interface {{ interface }}
+{
+    /**
+     * @return Collection<int, {{ model }}>
+     */
+    public function all(): Collection;
+
+    public function find(int $id): ?{{ model }};
+
+    public function create(array $attributes): {{ model }};
+
+    public function update({{ model }} $model, array $attributes): bool;
+
+    public function delete({{ model }} $model): bool;
+}
