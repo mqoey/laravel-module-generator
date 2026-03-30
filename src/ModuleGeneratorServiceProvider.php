@@ -18,7 +18,7 @@ use Mqondisi\ModuleGenerator\Services\ModuleNamingResolver;
 /**
  * Registers package services, console command, and optional contract bindings for extension/testing.
  *
- * Compatible with Laravel 10.x and 11.x (`illuminate/*` ^10|^11).
+ * Compatible with Laravel 9.x, 10.x, and 11.x (`illuminate/*` ^9|^10|^11).
  */
 class ModuleGeneratorServiceProvider extends ServiceProvider
 {
