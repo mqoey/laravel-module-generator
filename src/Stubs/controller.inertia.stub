@@ -9,6 +9,9 @@ use App\Repositories\Interfaces\{{ interface }};
 use Inertia\Inertia;
 use Inertia\Response;
 
+/**
+ * Inertia supports Vue, React, or Svelte — use the matching Vite entry and `@inertiajs/*` adapter in your app.
+ */
 final class {{ controller }} extends Controller
 {
     public function __construct(

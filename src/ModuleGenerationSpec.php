@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Mqondisi\ModuleGenerator;
 
 /**
- * Immutable description of one `make:module` run: derived names and boolean feature toggles.
+ * Immutable description of one `make:module` run: derived names and feature toggles.
  *
  * All flags are independent and may be combined (e.g. API + tenant + DAO).
  */
@@ -20,7 +20,8 @@ final class ModuleGenerationSpec
      * @param  string  $dtoName  Spatie Data DTO short name.
      * @param  string  $controllerName  HTTP controller short name (shared basename for Api and web when both are generated).
      * @param  bool  $api  Emit `app/Http/Controllers/Api/{Controller}.php`.
-     * @param  bool  $inertia  Emit web `Controller` + Vue page under `resources/js/Pages`.
+     * @param  bool  $inertia  Emit web `Controller` + page stub under `resources/js/Pages`.
+     * @param  string  $inertiaStack  When `inertia` is true: `vue`, `react`, or `svelte` (file extension and stub). Ignored when `inertia` is false.
      * @param  bool  $tenant  Team column, model scopes, and tenant-aware docblocks.
      * @param  bool  $withDao  Use DAO layer; repository depends on DAO only (no BaseRepository path).
      * @param  string|null  $daoName  Short class name of DAO implementation, or null when `withDao` is false.
@@ -37,6 +38,7 @@ final class ModuleGenerationSpec
         public readonly string $controllerName,
         public readonly bool $api,
         public readonly bool $inertia,
+        public readonly string $inertiaStack,
         public readonly bool $tenant,
         public readonly bool $withDao,
         public readonly ?string $daoName,

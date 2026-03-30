@@ -1,0 +1,13 @@
+import React from 'react';
+
+/**
+ * {{ plural_model }} — Inertia + React page stub (match your Vite/React setup).
+ */
+export default function Index() {
+    return (
+        <div className="p-6">
+            <h1 className="text-xl font-semibold">{{ plural_model }} index</h1>
+            <p className="text-sm text-gray-600 mt-2">Module page stub (Inertia + React).</p>
+        </div>
+    );
+}

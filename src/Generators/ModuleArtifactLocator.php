@@ -92,11 +92,19 @@ final class ModuleArtifactLocator
         return $this->inertiaControllerAbsolutePath();
     }
 
-    public function vueIndexPageAbsolutePath(): string
+    /**
+     * Inertia page path: extension matches {@see ModuleGenerationSpec::$inertiaStack} (vue / jsx / svelte).
+     */
+    public function inertiaPageAbsolutePath(): string
     {
         $plural = Str::pluralStudly($this->spec->modelName);
+        $extension = match ($this->spec->inertiaStack) {
+            'react' => 'jsx',
+            'svelte' => 'svelte',
+            default => 'vue',
+        };
 
-        return $this->join('resources', 'js', 'Pages', $plural, 'Index.vue');
+        return $this->join('resources', 'js', 'Pages', $plural, 'Index.'.$extension);
     }
 
     private function join(string ...$segments): string

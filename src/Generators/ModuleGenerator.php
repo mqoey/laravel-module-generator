@@ -54,7 +54,12 @@ final class ModuleGenerator implements ScaffoldsModuleFiles
         $this->writeControllers($basePath, $locator, $replacements, $spec, $report);
 
         if ($spec->inertia) {
-            $this->writeFromStub($basePath, $locator->vueIndexPageAbsolutePath(), 'vue-page.stub', $replacements, $spec->force, $report);
+            $pageStub = match ($spec->inertiaStack) {
+                'react' => 'react-page.stub',
+                'svelte' => 'svelte-page.stub',
+                default => 'vue-page.stub',
+            };
+            $this->writeFromStub($basePath, $locator->inertiaPageAbsolutePath(), $pageStub, $replacements, $spec->force, $report);
         }
 
         $this->repositoryServiceProviderRegistrar->register($basePath, $spec, $report);

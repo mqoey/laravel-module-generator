@@ -15,11 +15,13 @@ interface ResolvesModuleGenerationSpec
 {
     /**
      * @param  string  $name  Raw module name argument (e.g. "customer", "blog-post").
+     * @param  string  $inertiaStack  `vue`, `react`, or `svelte` — used when generating Inertia page stubs.
      */
     public function resolve(
         string $name,
         bool $api,
         bool $inertia,
+        string $inertiaStack,
         bool $tenant,
         bool $withDao,
         bool $force,

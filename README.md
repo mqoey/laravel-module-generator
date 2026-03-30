@@ -41,15 +41,23 @@ php artisan make:module Customer --with-dao
 php artisan make:module Customer --api --tenant --with-dao
 ```
 
-Flags can be combined. With both `--api` and `--inertia`, an API controller and a web Inertia controller are generated (plus the Vue page when Inertia is used).
+Flags can be combined. With both `--api` and `--inertia`, an API controller and a web Inertia controller are generated (plus a page stub when Inertia is used).
 
 | Option | Effect |
 |--------|--------|
 | `--api` | JSON API controller under `app/Http/Controllers/Api` |
-| `--inertia` | Web controller + `resources/js/Pages/.../Index.vue` stub |
+| `--inertia` | Web controller + page stub under `resources/js/Pages/.../` (`Index.vue`, `Index.jsx`, or `Index.svelte`) |
+| `--inertia-stack` | With `--inertia`: `vue` (default), `react`, or `svelte` — picks stub file and extension |
 | `--tenant` | `team_id` on migration, model global scope / `scopeTeam`, tenant docblocks |
 | `--with-dao` | `app/DAO` + `app/DAO/Interfaces`; repository depends on the DAO only |
 | `--force` | Overwrite files that already exist (use with care) |
+
+Examples:
+
+```bash
+php artisan make:module Customer --inertia --inertia-stack=react
+php artisan make:module Customer --inertia --inertia-stack=svelte
+```
 
 After a run, the command prints **Created**, **Skipped**, and **Overwritten** lines plus a short summary.
 

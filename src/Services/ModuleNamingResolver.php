@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Mqondisi\ModuleGenerator\Services;
 
 use Illuminate\Support\Str;
+use InvalidArgumentException;
 use Mqondisi\ModuleGenerator\Contracts\ResolvesModuleGenerationSpec;
 use Mqondisi\ModuleGenerator\ModuleGenerationSpec;
 
@@ -13,10 +14,14 @@ use Mqondisi\ModuleGenerator\ModuleGenerationSpec;
  */
 final class ModuleNamingResolver implements ResolvesModuleGenerationSpec
 {
+    /** @var list<string> */
+    private const INERTIA_STACKS = ['vue', 'react', 'svelte'];
+
     public function resolve(
         string $name,
         bool $api,
         bool $inertia,
+        string $inertiaStack,
         bool $tenant,
         bool $withDao,
         bool $force,
@@ -32,6 +37,19 @@ final class ModuleNamingResolver implements ResolvesModuleGenerationSpec
         $daoName = $withDao ? $modelName.'Dao' : null;
         $daoInterfaceName = $withDao ? $modelName.'DaoInterface' : null;
 
+        $normalizedStack = strtolower(trim($inertiaStack));
+        if ($normalizedStack === '') {
+            $normalizedStack = 'vue';
+        }
+        if ($inertia && ! in_array($normalizedStack, self::INERTIA_STACKS, true)) {
+            throw new InvalidArgumentException(
+                'inertia-stack must be one of: '.implode(', ', self::INERTIA_STACKS)."; got [{$inertiaStack}]."
+            );
+        }
+        if (! $inertia) {
+            $normalizedStack = 'vue';
+        }
+
         return new ModuleGenerationSpec(
             inputName: $inputName,
             modelName: $modelName,
@@ -42,6 +60,7 @@ final class ModuleNamingResolver implements ResolvesModuleGenerationSpec
             controllerName: $controllerName,
             api: $api,
             inertia: $inertia,
+            inertiaStack: $normalizedStack,
             tenant: $tenant,
             withDao: $withDao,
             daoName: $daoName,
