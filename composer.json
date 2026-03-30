@@ -8,8 +8,13 @@
         "illuminate/console": "^9.0|^10.0|^11.0|^12.0|^13.0",
         "illuminate/contracts": "^9.0|^10.0|^11.0|^12.0|^13.0",
         "illuminate/filesystem": "^9.0|^10.0|^11.0|^12.0|^13.0",
-        "illuminate/support": "^9.0|^10.0|^11.0|^12.0|^13.0",
-        "spatie/laravel-data": "^3.0|^4.0"
+        "illuminate/support": "^9.0|^10.0|^11.0|^12.0|^13.0"
+    },
+    "require-dev": {
+        "spatie/laravel-data": "^4.0"
+    },
+    "suggest": {
+        "spatie/laravel-data": "Install in your app (^4.0 for Laravel 11–13) so generated DTO stubs under app/Data resolve."
     },
     "autoload": {
         "psr-4": {
